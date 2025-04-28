@@ -17,21 +17,33 @@ from .forms import CaptchaForm
 
 def login_view(request):
     error_message = None 
+    max_attempts = 3
+    attempts = request.session.get('login_attempts', 0)
     if request.method == "POST":  
+        if attempts >= max_attempts:
+            error_message = "Demasiados intentos. Intenta más tarde."
+            return render(request, 'accounts/login.html', {'error': error_message})
+
         captcha_form = CaptchaForm(request.POST)
         if captcha_form.is_valid():
             username = request.POST.get("username")  
             password = request.POST.get("password")  
             user = authenticate(request, username=username, password=password)  
             if user is not None:  
-                login(request, user)  
+                login(request, user)
+                request.session['login_attempts'] = 0
                 next_url = request.POST.get('next') or request.GET.get('next') or 'home'  
                 return redirect(next_url) 
             else:
+                request.session['login_attempts'] = attempts + 1
                 error_message = "Credenciales invalidas"  
         else:
             error_message = "Error en el captcha. Por favor intente de nuevo."            
-    return render(request, 'accounts/login.html', {'error': error_message})
+    return render(request, 'accounts/login.html', {
+        'error': error_message,
+        'attempts': attempts,
+        'max_attempts': max_attempts
+    })
 
 def register_view(request):
     if request.method == "POST":
