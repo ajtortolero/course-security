@@ -12,6 +12,26 @@ from django.views import View
 from django.contrib.auth.models import User
 # Import the RegisterForm from forms.py
 from .forms import RegisterForm
+# Import the CaptchaForm from forms.py
+from .forms import CaptchaForm
+
+def login_view(request):
+    error_message = None 
+    if request.method == "POST":  
+        captcha_form = CaptchaForm(request.POST)
+        if captcha_form.is_valid():
+            username = request.POST.get("username")  
+            password = request.POST.get("password")  
+            user = authenticate(request, username=username, password=password)  
+            if user is not None:  
+                login(request, user)  
+                next_url = request.POST.get('next') or request.GET.get('next') or 'home'  
+                return redirect(next_url) 
+            else:
+                error_message = "Credenciales invalidas"  
+        else:
+            error_message = "Error en el captcha. Por favor intente de nuevo."            
+    return render(request, 'accounts/login.html', {'error': error_message})
 
 def register_view(request):
     if request.method == "POST":
@@ -25,21 +45,6 @@ def register_view(request):
     else:
         form = RegisterForm()
     return render(request, 'accounts/register.html', {'form':form})
-
-
-def login_view(request):
-    error_message = None 
-    if request.method == "POST":  
-        username = request.POST.get("username")  
-        password = request.POST.get("password")  
-        user = authenticate(request, username=username, password=password)  
-        if user is not None:  
-            login(request, user)  
-            next_url = request.POST.get('next') or request.GET.get('next') or 'home'  
-            return redirect(next_url) 
-        else:
-            error_message = "Credenciales invalidas"  
-    return render(request, 'accounts/login.html', {'error': error_message})
 
     
 def logout_view(request):

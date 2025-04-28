@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_recaptcha',
     'authApp'
 ]
 
@@ -129,3 +130,7 @@ LOGIN_REDIRECT_URL = 'home'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+RECAPTCHA_PUBLIC_KEY = '6LcqJicrAAAAAJrYh9eFLH4CiOv58jY7nC15aFwJ'
+RECAPTCHA_PRIVATE_KEY = '6LcqJicrAAAAADXTtVeMrQmKSsyF1CY-IBWoph5u'
+RECAPTCHA_REQUIRED_SCORE = 0.85  # si usaras reCAPTCHA v3 (opcional en v2)

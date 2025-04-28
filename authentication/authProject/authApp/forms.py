@@ -1,5 +1,9 @@
 from django import forms
 from django.contrib.auth.models import User
+from django_recaptcha.fields import ReCaptchaField
+
+class CaptchaForm(forms.Form):
+    captcha = ReCaptchaField()
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, label="Contraseña")
