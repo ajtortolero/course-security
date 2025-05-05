@@ -1,11 +1,5 @@
 # Configuración de HTTPS local en Django usando certificado autofirmado
 
-Hola equipo,
-
-Comparto a continuación los pasos detallados para ejecutar un proyecto Django localmente con HTTPS utilizando un certificado autofirmado. Esta configuración es útil para pruebas de cookies seguras, autenticación OAuth2, etc., sin necesidad de usar Nginx ni desplegar a un servidor externo.
-
----
-
 ## 🔧 Requisitos previos
 
 - Tener Python y Django instalados.
