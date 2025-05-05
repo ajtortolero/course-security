@@ -17,16 +17,6 @@ Ejecutar:
 ```bash
 pip install django-extensions pyOpenSSL werkzeug
 ```
-
-Luego, agregar `'django_extensions'` al archivo `settings.py` en la sección `INSTALLED_APPS`:
-
-```python
-INSTALLED_APPS = [
-    ...
-    'django_extensions',
-]
-```
-
 ---
 
 ### 2. Generar un certificado autofirmado
