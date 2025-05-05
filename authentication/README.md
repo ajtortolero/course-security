@@ -83,14 +83,3 @@ https://127.0.0.1:4443/
 ⚠️ Puede aparecer una advertencia de "sitio no confiable" si no se instaló el certificado. Es seguro continuar si fue generado localmente.
 
 ---
-
-## 💡 Nota importante
-
-Este entorno es solo para pruebas locales. **No debe usarse en producción.**
-
----
-
-Quedo atento ante cualquier duda.
-
-Saludos,  
-[Tu nombre]
